@@ -1,24 +1,26 @@
 import { getQueryClient } from "@/tanstack-query/get-query-client";
-import OfficesTable, { getOfficesQueryOptions } from "./_lib/OfficesTable";
+import EmployeesTable, {
+  getEmployeesQueryOptions
+} from "./_lib/EmployeesTable";
 import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
 
-const OfficesPage = () => {
+const EmployeesPage = () => {
   const queryClient = getQueryClient();
   void queryClient.prefetchQuery({
-    ...getOfficesQueryOptions,
-    queryFn: getOfficesQueryOptions.queryFn
+    ...getEmployeesQueryOptions,
+    queryFn: getEmployeesQueryOptions.queryFn
   });
 
   return (
     <div className="p-4">
-      <h1 className="font-bold text-xl">Biura w systemie</h1>
+      <h1 className="font-bold text-xl">Pracownicy w systemie</h1>
       <HydrationBoundary state={dehydrate(queryClient)}>
-        <div className="max-w-5xl mt-5 mx-auto">
-          <OfficesTable />
+        <div className="max-w-6xl mt-5 mx-auto">
+          <EmployeesTable />
         </div>
       </HydrationBoundary>
     </div>
   );
 };
 
-export default OfficesPage;
+export default EmployeesPage;
