@@ -1,6 +1,6 @@
 "use client";
 
-import { ChevronRight, type LucideIcon } from "lucide-react";
+import { type LucideIcon } from "lucide-react";
 
 import {
   SidebarGroup,
@@ -8,26 +8,26 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-  SidebarMenuSub,
   SidebarMenuSubButton,
   SidebarMenuSubItem
 } from "@/components/ui/sidebar";
 import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
 
-export function NavMain({
-  items
-}: {
-  items: {
+export type NavItem = {
+  title: string;
+  url: string;
+  icon?: LucideIcon;
+  isActive?: boolean;
+  items?: {
     title: string;
     url: string;
-    icon?: LucideIcon;
-    isActive?: boolean;
-    items?: {
-      title: string;
-      url: string;
-    }[];
   }[];
-}) {
+};
+
+export function NavMain({ items }: { items: NavItem[] }) {
+  const pathname = usePathname();
+
   return (
     <SidebarGroup>
       <SidebarGroupLabel>Menu</SidebarGroupLabel>
@@ -38,6 +38,12 @@ export function NavMain({
               <SidebarMenuButton
                 tooltip={item.title}
                 className="cursor-pointer"
+                data-active={
+                  pathname === item.url ||
+                  item.items?.some((subItem) => pathname === subItem.url)
+                    ? "true"
+                    : "false"
+                }
               >
                 {item.icon && <item.icon />}
                 <span>{item.title}</span>

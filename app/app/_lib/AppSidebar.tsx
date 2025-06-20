@@ -1,41 +1,56 @@
 "use client";
 import * as React from "react";
 
+import { NavItem, NavMain } from "@/components/nav-main";
 import { NavUser } from "@/components/nav-user";
 import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
-  SidebarHeader,
   SidebarRail
 } from "@/components/ui/sidebar";
-import { auth } from "@/auth";
-import { TeamSwitcher } from "@/components/team-switcher";
-import { GalleryVerticalEnd } from "lucide-react";
+import { Building, Home, User } from "lucide-react";
 import { useSession } from "next-auth/react";
-import { useRouter } from "next/router";
-import { NavMain } from "@/components/nav-main";
+import { ThemeToggle } from "@/components/theme/theme-toggle";
+
+const navItems: NavItem[] = [
+  {
+    title: "Dashboard",
+    url: "/app",
+    icon: Home
+  },
+  {
+    title: "Biura",
+    url: "/app/offices",
+    icon: Building
+  },
+  {
+    title: "Oddziały",
+    url: "/app/departments",
+    icon: Building
+  },
+  {
+    title: "Użytkownicy",
+    url: "/app/users",
+    icon: User
+  }
+];
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const session = useSession();
   return (
     <Sidebar collapsible="icon" {...props}>
+      <NavUser
+        user={{ ...(session.data?.user! as { name: string; email: string }) }}
+      />
+      <SidebarContent>
+        <NavMain items={navItems} />
+      </SidebarContent>
+
       <SidebarFooter>
-        <NavUser
-          user={{ ...(session.data?.user! as { name: string; email: string }) }}
-        />
-        <SidebarContent>
-          <NavMain
-            items={[
-              {
-                title: "Galeria",
-                url: "#",
-                icon: GalleryVerticalEnd
-              }
-            ]}
-          />
-        </SidebarContent>
+        <ThemeToggle />
       </SidebarFooter>
+
       <SidebarRail />
     </Sidebar>
   );

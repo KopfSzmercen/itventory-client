@@ -37,8 +37,6 @@ export const { auth, signIn, signOut, handlers } = NextAuth({
             }
           });
 
-          console.log("Sign in response status:", signInResponse.status);
-
           if (!signInResponse.ok) return null;
 
           const signInResult = (await signInResponse.json()) as {
@@ -53,8 +51,6 @@ export const { auth, signIn, signOut, handlers } = NextAuth({
               }
             }
           );
-
-          console.log("Get me response status:", getMeResponse.status);
 
           if (!getMeResponse.ok) return null;
 

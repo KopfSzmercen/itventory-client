@@ -31,19 +31,19 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased `}
       >
-        <Providers>
-          <SessionProvider>
-            <ThemeProvider
-              attribute="class"
-              defaultTheme="system"
-              enableSystem
-              disableTransitionOnChange
-            >
+        <SessionProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <Providers>
               <div className="px-4">{children}</div>
-              <Toaster position="bottom-right" richColors />
-            </ThemeProvider>
-          </SessionProvider>
-        </Providers>
+            </Providers>
+            <Toaster position="bottom-right" richColors />
+          </ThemeProvider>
+        </SessionProvider>
       </body>
     </html>
   );
