@@ -61,9 +61,10 @@ async function createRoom(roomData: CreateRoomRequest): Promise<void> {
 
 interface CreateRoomModalProps {
   officeId: string;
+  refetch: () => void;
 }
 
-export function CreateRoomModal({ officeId }: CreateRoomModalProps) {
+export function CreateRoomModal({ officeId, refetch }: CreateRoomModalProps) {
   const [open, setOpen] = useState(false);
   const queryClient = useQueryClient();
   const searchParams = useSearchParams();
@@ -93,12 +94,11 @@ export function CreateRoomModal({ officeId }: CreateRoomModalProps) {
       toast.success("Sukces", {
         description: "Pokój został pomyślnie utworzony"
       });
-      queryClient.invalidateQueries({
-        queryKey: getOfficeRoomsQueryOptions(officeId, roomName).queryKey
-      });
+      refetch && refetch();
       reset();
       setOpen(false);
     },
+    //eslint-disable-next-line
     onError: (error: any) => {
       if (error.response?.status === 400 && error.response?.data?.errors) {
         const serverErrors = error.response.data.errors;

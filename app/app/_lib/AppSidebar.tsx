@@ -3,22 +3,15 @@ import * as React from "react";
 
 import { NavItem, NavMain } from "@/components/nav-main";
 import { NavUser } from "@/components/nav-user";
+import { ThemeToggle } from "@/components/theme/theme-toggle";
 import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
   SidebarRail
 } from "@/components/ui/sidebar";
-import {
-  Building,
-  Computer,
-  Home,
-  IdCardIcon,
-  IdCardLanyard,
-  User
-} from "lucide-react";
+import { Building, Computer, Home, IdCardLanyard, User } from "lucide-react";
 import { useSession } from "next-auth/react";
-import { ThemeToggle } from "@/components/theme/theme-toggle";
 
 const navItems: NavItem[] = [
   {
@@ -58,7 +51,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar collapsible="icon" {...props}>
       <NavUser
-        user={{ ...(session.data?.user! as { name: string; email: string }) }}
+        user={{ ...(session.data?.user as { name: string; email: string }) }}
       />
       <SidebarContent>
         <NavMain items={navItems} />

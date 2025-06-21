@@ -77,14 +77,14 @@ export function RegisterForm({
       toast.success("Rejestracja przebiegła pomyślnie!", {
         description: "Możesz się teraz zalogować używając swoich danych."
       });
-    } catch (error: any) {
-      const errorMessage = error.message || "Wystąpił błąd podczas rejestracji";
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "Wystąpił błąd";
       setError("root", {
         type: "manual",
-        message: errorMessage
+        message: "Wystąpił błąd podczas rejestracji"
       });
       toast.error("Błąd rejestracji", {
-        description: errorMessage
+        description: "Spróbuj ponownie później." + message
       });
     }
   };

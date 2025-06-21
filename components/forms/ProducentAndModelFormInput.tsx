@@ -88,7 +88,7 @@ const ProducentAndModelFormInput = forwardRef<
       if (producentValue !== selectedProducent) {
         setSelectedProducent(producentValue);
       }
-    }, [producentValue]);
+    }, [producentValue, selectedProducent]);
 
     const handleProducentChange = (value: string) => {
       setSelectedProducent(value);

@@ -1,5 +1,6 @@
 "use client";
 
+import { SelectEmployeesFormInput } from "@/components/forms";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -9,11 +10,9 @@ import {
   DialogTitle
 } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
-import { SelectEmployeesFormInput } from "@/components/forms";
 import api from "@/lib/api";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
@@ -71,6 +70,7 @@ export function ChangePrimaryUserModal({
       onOpenChange(false);
       reset();
     },
+    //eslint-disable-next-line
     onError: (error: any) => {
       toast.error("Wystąpił błąd podczas zmiany użytkownika głównego");
       console.error("Error changing primary user:", error);

@@ -1,8 +1,6 @@
 import { RegisterForm } from "@/app/(auth)/register/_lib/RegisterForm";
-import { getQueryClient } from "@/tanstack-query/get-query-client";
 
 export default function Register() {
-  const queryClient = getQueryClient();
   return (
     <div className="min-h-screen from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800">
       <div className="flex justify-center mt-40">

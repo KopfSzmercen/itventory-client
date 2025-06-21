@@ -108,7 +108,7 @@ export default function OfficeRoomsTable({ officeId }: OfficeRoomsTableProps) {
     [updateSearchParams]
   );
 
-  const { data, isError, isLoading } = useSuspenseQuery(
+  const { data, isError, isLoading, refetch } = useSuspenseQuery(
     getOfficeRoomsQueryOptions(
       officeId,
       searchParams.get("RoomName") || undefined
@@ -154,7 +154,7 @@ export default function OfficeRoomsTable({ officeId }: OfficeRoomsTableProps) {
                 onChange={(e) => handleSearch(e.target.value)}
                 className="max-w-sm"
               />
-              <CreateRoomModal officeId={officeId} />
+              <CreateRoomModal officeId={officeId} refetch={refetch} />
             </CardAction>
           </div>
         </CardHeader>
@@ -179,7 +179,7 @@ export default function OfficeRoomsTable({ officeId }: OfficeRoomsTableProps) {
               onChange={(e) => handleSearch(e.target.value)}
               className="max-w-sm"
             />
-            <CreateRoomModal officeId={officeId} />
+            <CreateRoomModal officeId={officeId} refetch={refetch} />
           </CardAction>
         </div>
       </CardHeader>

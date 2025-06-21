@@ -1,5 +1,13 @@
 "use client";
 
+import {
+  DatePickerFormInput,
+  SelectAreasFormInput,
+  SelectDepartmentsFormInput,
+  SelectEmployeesFormInput,
+  SelectRoomsFormInput,
+  SelectSeniorityFormInput
+} from "@/components/forms";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -10,14 +18,6 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import {
-  SelectDepartmentsFormInput,
-  SelectEmployeesFormInput,
-  SelectRoomsFormInput,
-  SelectSeniorityFormInput,
-  SelectAreasFormInput,
-  DatePickerFormInput
-} from "@/components/forms";
 import api from "@/lib/api";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -25,11 +25,10 @@ import {
   useQueryClient,
   useSuspenseQuery
 } from "@tanstack/react-query";
-import { useForm, Controller } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 import { getEmployeeQueryOptions } from "./EmployeeDetails";
-import type { Employee } from "./types";
 
 const editEmployeeSchema = z.object({
   name: z.string().min(1, "Imię jest wymagane"),

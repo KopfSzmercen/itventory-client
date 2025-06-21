@@ -13,38 +13,34 @@ import {
   TableRow
 } from "@/components/ui/table";
 import api from "@/lib/api";
+import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
 import {
-  queryOptions,
-  useQuery,
-  useSuspenseQuery
-} from "@tanstack/react-query";
-import {
-  Monitor,
-  Calendar,
-  MapPin,
+  Activity,
   Building,
-  Users,
+  Calendar,
   DollarSign,
-  Hash,
   Globe,
-  Activity
+  Hash,
+  MapPin,
+  Monitor,
+  Users
 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import type { HardwareDetails as HardwareDetailsType } from "./types";
-import { ChangePrimaryUserModal } from "./ChangePrimaryUserModal";
 import { AddLogonModal } from "./AddLogonModal";
+import { ChangePrimaryUserModal } from "./ChangePrimaryUserModal";
+import type { HardwareDetails as HardwareDetailsType } from "./types";
 
 // Re-export types for convenience
 export type {
+  Department,
   HardwareDetails as HardwareDetailsType,
   Logon,
+  Manager,
+  Model,
   PrimaryUser,
   Producent,
-  Model,
-  Room,
-  Department,
-  Manager
+  Room
 } from "./types";
 
 async function getHardware(id: string): Promise<HardwareDetailsType> {

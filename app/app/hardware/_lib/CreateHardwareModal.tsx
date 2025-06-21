@@ -1,5 +1,12 @@
 "use client";
 
+import {
+  DatePickerFormInput,
+  ProducentAndModelFormInput,
+  SelectDepartmentsFormInput,
+  SelectEmployeesFormInput,
+  SelectRoomsFormInput
+} from "@/components/forms";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -18,13 +25,6 @@ import {
   SelectTrigger,
   SelectValue
 } from "@/components/ui/select";
-import {
-  SelectEmployeesFormInput,
-  SelectDepartmentsFormInput,
-  SelectRoomsFormInput,
-  DatePickerFormInput,
-  ProducentAndModelFormInput
-} from "@/components/forms";
 import api from "@/lib/api";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -101,8 +101,6 @@ export function CreateHardwareModal() {
     register,
     handleSubmit,
     control,
-    watch,
-    setValue,
     formState: { errors, isSubmitting },
     reset
   } = useForm<CreateHardwareFormData>({
@@ -122,6 +120,7 @@ export function CreateHardwareModal() {
       setOpen(false);
       reset();
     },
+    //eslint-disable-next-line
     onError: (error: any) => {
       toast.error("Wystąpił błąd podczas dodawania sprzętu");
       console.error("Error creating hardware:", error);

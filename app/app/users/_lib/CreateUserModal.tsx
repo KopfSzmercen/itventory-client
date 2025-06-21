@@ -76,6 +76,7 @@ export function CreateUserModal() {
       reset();
       setOpen(false);
     },
+    //eslint-disable-next-line
     onError: (error: any) => {
       if (error.response?.status === 400 && error.response?.data?.errors) {
         const serverErrors = error.response.data.errors;

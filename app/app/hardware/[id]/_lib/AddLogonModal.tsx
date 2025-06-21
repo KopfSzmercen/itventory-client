@@ -1,5 +1,9 @@
 "use client";
 
+import {
+  DomainSelectFormInput,
+  SelectEmployeesFormInput
+} from "@/components/forms";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -10,18 +14,13 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import {
-  SelectEmployeesFormInput,
-  DomainSelectFormInput
-} from "@/components/forms";
 import api from "@/lib/api";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useState } from "react";
+import { Loader2Icon } from "lucide-react";
 import { Controller, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
-import { Loader2Icon } from "lucide-react";
 
 const addLogonSchema = z.object({
   userId: z.string().min(1, "Użytkownik jest wymagany"),
@@ -85,6 +84,7 @@ export function AddLogonModal({
       onOpenChange(false);
       reset();
     },
+    //eslint-disable-next-line
     onError: (error: any) => {
       toast.error("Wystąpił błąd podczas dodawania logowania");
       console.error("Error adding logon:", error);
