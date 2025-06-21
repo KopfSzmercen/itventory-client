@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/table";
 import api from "@/lib/api";
 import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
 
 interface Manager {
   id: string;
@@ -70,9 +71,14 @@ export const getEmployeesQueryOptions = queryOptions<EmployeesResponse>({
 });
 
 export default function EmployeesTable() {
+  const router = useRouter();
   const { data, isError, isLoading } = useSuspenseQuery(
     getEmployeesQueryOptions
   );
+
+  const handleEmployeeClick = (employeeId: string) => {
+    router.push(`/app/employees/${employeeId}`);
+  };
 
   if (isError) {
     return (
@@ -105,7 +111,6 @@ export default function EmployeesTable() {
       <CardHeader>
         <div className="flex justify-between items-center">
           <CardTitle>Pracownicy</CardTitle>
-          {/* TODO: Add CreateEmployeeModal when needed */}
         </div>
       </CardHeader>
       <CardContent>
@@ -115,6 +120,9 @@ export default function EmployeesTable() {
               <TableHead>Imię i nazwisko</TableHead>
               <TableHead>Stanowisko</TableHead>
               <TableHead>Staż</TableHead>
+              <TableHead>Data zatrudnienia</TableHead>
+              <TableHead>Obszar</TableHead>
+              <TableHead>Pokój</TableHead>
               <TableHead>Dział</TableHead>
               <TableHead>Menadżer</TableHead>
               <TableHead>Status</TableHead>
@@ -122,12 +130,25 @@ export default function EmployeesTable() {
           </TableHeader>
           <TableBody>
             {data?.map((employee) => (
-              <TableRow key={employee.id}>
+              <TableRow
+                key={employee.id}
+                className="cursor-pointer hover:bg-muted/50 transition-colors"
+                onClick={() => handleEmployeeClick(employee.id)}
+              >
                 <TableCell className="font-medium">
                   {employee.name} {employee.lastName}
                 </TableCell>
                 <TableCell>{employee.positionName}</TableCell>
                 <TableCell>{employee.seniority}</TableCell>
+                <TableCell>
+                  {employee.hireDate
+                    ? new Date(employee.hireDate).toLocaleDateString("pl-PL")
+                    : "-"}
+                </TableCell>
+                <TableCell>{employee.area || "-"}</TableCell>
+                <TableCell>
+                  {employee.room ? employee.room.roomName : "-"}
+                </TableCell>
                 <TableCell>
                   {employee.department ? employee.department.name : "-"}
                 </TableCell>

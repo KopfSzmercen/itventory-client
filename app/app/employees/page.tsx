@@ -14,8 +14,13 @@ const EmployeesPage = () => {
   return (
     <div className="p-4">
       <h1 className="font-bold text-xl">Pracownicy w systemie</h1>
+      <p>
+        W tym miejscu znajdziesz listę pracowników w systemie. Możesz przeglądać
+        ich dane, a także dodawać nowych pracowników.
+      </p>
+
       <HydrationBoundary state={dehydrate(queryClient)}>
-        <div className="max-w-6xl mt-5 mx-auto">
+        <div className="max-w-7xl mt-6 mx-auto">
           <EmployeesTable />
         </div>
       </HydrationBoundary>

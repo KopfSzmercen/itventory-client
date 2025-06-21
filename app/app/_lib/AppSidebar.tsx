@@ -9,7 +9,7 @@ import {
   SidebarFooter,
   SidebarRail
 } from "@/components/ui/sidebar";
-import { Building, Home, User } from "lucide-react";
+import { Building, Home, IdCardIcon, IdCardLanyard, User } from "lucide-react";
 import { useSession } from "next-auth/react";
 import { ThemeToggle } from "@/components/theme/theme-toggle";
 
@@ -33,6 +33,11 @@ const navItems: NavItem[] = [
     title: "Użytkownicy",
     url: "/app/users",
     icon: User
+  },
+  {
+    title: "Pracownicy",
+    url: "/app/employees",
+    icon: IdCardLanyard
   }
 ];
 
