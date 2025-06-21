@@ -1,3 +1,4 @@
+import OfficeRoomsTable from "@/app/app/offices/[id]/_lib/OfficeRoomsTable";
 import OfficeDetails from "./_lib/OfficeDetails";
 
 interface OfficeDetailsPageProps {
@@ -13,8 +14,9 @@ export default async function OfficeDetailsPage({
 
   return (
     <div className="p-4">
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-4xl mx-auto space-y-6">
         <OfficeDetails id={id} />
+        <OfficeRoomsTable officeId={id} />
       </div>
     </div>
   );
