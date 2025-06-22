@@ -10,7 +10,14 @@ import {
   SidebarFooter,
   SidebarRail
 } from "@/components/ui/sidebar";
-import { Building, Computer, Home, IdCardLanyard, User } from "lucide-react";
+import {
+  Binary,
+  Building,
+  Computer,
+  Home,
+  IdCardLanyard,
+  User
+} from "lucide-react";
 import { useSession } from "next-auth/react";
 
 const navItems: NavItem[] = [
@@ -43,6 +50,11 @@ const navItems: NavItem[] = [
     title: "Sprzęt",
     url: "/app/hardware",
     icon: Computer
+  },
+  {
+    title: "Oprogramowanie",
+    url: "/app/software",
+    icon: Binary
   }
 ];
 
