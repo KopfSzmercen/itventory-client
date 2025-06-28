@@ -19,11 +19,9 @@ api.interceptors.request.use(
 
       if (typeof window !== "undefined") {
         session = await getSession();
-        console.log("Client-side session:", session);
       } else {
         // Server-side: use auth() function
         session = await auth();
-        console.log("Server-side session:", session);
       }
 
       if (session?.user?.token) {

@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/table";
 import api from "@/lib/api";
 import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
-import { useRouter } from "next/navigation";
+import { useRouter } from "nextjs-toploader/app";
 
 interface Manager {
   id: string;

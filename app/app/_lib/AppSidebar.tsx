@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/sidebar";
 import {
   Binary,
+  Bot,
   Building,
   Computer,
   Home,
@@ -55,6 +56,11 @@ const navItems: NavItem[] = [
     title: "Oprogramowanie",
     url: "/app/software",
     icon: Binary
+  },
+  {
+    title: "Czat AI",
+    url: "/app/chat",
+    icon: Bot
   }
 ];
 

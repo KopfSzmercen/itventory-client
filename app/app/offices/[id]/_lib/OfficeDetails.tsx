@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import api from "@/lib/api";
 import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
 import { ArrowLeft, MapPin } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { useRouter } from "nextjs-toploader/app";
 
 interface OfficeDetail {
   id: string;

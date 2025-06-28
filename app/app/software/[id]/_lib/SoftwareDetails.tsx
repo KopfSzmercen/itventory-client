@@ -35,7 +35,7 @@ import {
   Tag,
   XCircle
 } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { useRouter } from "nextjs-toploader/app";
 
 async function getSoftware(id: string): Promise<Software> {
   const response = await api.get(`/software/${id}`);

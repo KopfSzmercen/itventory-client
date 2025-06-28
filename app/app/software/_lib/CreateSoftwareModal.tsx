@@ -88,10 +88,9 @@ export default function CreateSoftwareModal() {
       setIsOpen(false);
       reset();
     },
-    onError: (error: any) => {
+    onError: (error) => {
       toast.error(
-        error?.response?.data?.message ||
-          "Wystąpił błąd podczas dodawania oprogramowania"
+        error?.message || "Wystąpił błąd podczas dodawania oprogramowania"
       );
     }
   });

@@ -79,9 +79,7 @@ export function AddSoftwareVersionModal({
     formState: { errors },
     reset,
     setError,
-    control,
-    setValue,
-    watch
+    control
   } = useForm<AddVersionFormData>({
     resolver: zodResolver(addVersionSchema),
     defaultValues: {

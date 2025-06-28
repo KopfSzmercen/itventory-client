@@ -8,7 +8,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import api from "@/lib/api";
 import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
 import { Edit, User, Calendar, MapPin, Building, Users } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { useRouter } from "nextjs-toploader/app";
 import { useState } from "react";
 import type { Employee } from "./types";
 

@@ -5,6 +5,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { Toaster } from "sonner";
 import "./globals.css";
 import { SessionProvider } from "next-auth/react";
+import NextTopLoader from "nextjs-toploader";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -39,6 +40,11 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             <Providers>
+              <NextTopLoader
+                showSpinner={false}
+                color="#155dfb"
+                shadow="0 0 10px ${color},0 0 5px ${color}"
+              />
               <div className="px-4">{children}</div>
             </Providers>
             <Toaster position="bottom-right" richColors />

@@ -1,5 +1,6 @@
 "use client";
 
+import { SelectEmployeesFormInput } from "@/components/forms/SelectEmployeesFormInput";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -11,17 +12,14 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { SelectEmployeesFormInput } from "@/components/forms/SelectEmployeesFormInput";
 import api from "@/lib/api";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { PlusIcon } from "lucide-react";
 import { useState } from "react";
-import { useForm, Controller } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
-import { getOfficeRoomsQueryOptions } from "@/app/app/offices/[id]/_lib/OfficeRoomsTable";
-import { useSearchParams } from "next/navigation";
 
 const createRoomSchema = z.object({
   name: z
@@ -66,9 +64,6 @@ interface CreateRoomModalProps {
 
 export function CreateRoomModal({ officeId, refetch }: CreateRoomModalProps) {
   const [open, setOpen] = useState(false);
-  const queryClient = useQueryClient();
-  const searchParams = useSearchParams();
-  const roomName = searchParams.get("RoomName") || "";
 
   const {
     register,
@@ -94,8 +89,11 @@ export function CreateRoomModal({ officeId, refetch }: CreateRoomModalProps) {
       toast.success("Sukces", {
         description: "Pokój został pomyślnie utworzony"
       });
+      //eslint-disable-next-line
       refetch && refetch();
-      reset();
+
+      //eslint-disable-next-line
+      reset && reset();
       setOpen(false);
     },
     //eslint-disable-next-line

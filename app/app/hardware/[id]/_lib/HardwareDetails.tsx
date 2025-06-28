@@ -25,7 +25,7 @@ import {
   Monitor,
   Users
 } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { useRouter } from "nextjs-toploader/app";
 import { useState } from "react";
 import { AddLogonModal } from "./AddLogonModal";
 import { ChangePrimaryUserModal } from "./ChangePrimaryUserModal";
