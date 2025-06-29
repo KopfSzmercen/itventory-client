@@ -1,0 +1,67 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install pnpm
+        run: npm install -g pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build
+        run: pnpm build
+
+      - name: Set owner to lowercase
+        id: string
+        uses: ASzc/change-string-case-action@v6
+        with:
+          string: ${{ github.repository_owner }}
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: ghcr.io/${{ steps.string.outputs.lowercase }}/it-ventory-client:${{ github.sha }}
+          file: ./Dockerfile
+
+      - name: Login to Azure
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Deploy to Azure Container App
+        uses: azure/container-apps-deploy-action@v1
+        with:
+          containerAppName: ${{ secrets.AZURE_CONTAINER_APP_NAME }}
+          resourceGroup: ${{ secrets.AZURE_RESOURCE_GROUP }}
+          imageToDeploy: ghcr.io/${{ steps.string.outputs.lowercase }}/it-ventory-client:${{ github.sha }}
+          environmentVariables: "NEXT_PUBLIC_BACKEND_ROOT_URL=${{ secrets.NEXT_PUBLIC_BACKEND_ROOT_URL }} NEXT_PUBLIC_AI_ROOT_URL=${{ secrets.NEXT_PUBLIC_AI_ROOT_URL }} AUTH_TRUST_HOST=${{ secrets.AUTH_TRUST_HOST }} NEXTAUTH_URL=${{ secrets.NEXTAUTH_URL }} BACKEND_ROOT_URL=${{ secrets.BACKEND_ROOT_URL }}"
+          registryUrl: ghcr.io
+          registryUsername: ${{ steps.string.outputs.lowercase }}
+          registryPassword: ${{ secrets.GITHUB_TOKEN }}
