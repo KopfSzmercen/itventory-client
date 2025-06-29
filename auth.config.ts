@@ -13,8 +13,8 @@ export const authConfig = {
       const isOnRegister = nextUrl.pathname.startsWith("/register");
       const isOnHome = nextUrl.pathname === "/";
 
-      // Allow access to public pages (home, login, register) when not authenticated
-      if (!isAuthenticated && (isOnHome || isOnLogin || isOnRegister)) {
+      // Allow access to login and register pages when not authenticated
+      if (!isAuthenticated && (isOnLogin || isOnRegister || isOnHome)) {
         return true;
       }
 
@@ -23,7 +23,7 @@ export const authConfig = {
         return false;
       }
 
-      // Redirect to app dashboard if authenticated and trying to access login/register
+      // Redirect to app if authenticated and trying to access login/register
       if (isAuthenticated && (isOnLogin || isOnRegister)) {
         return Response.redirect(new URL("/app", nextUrl));
       }
