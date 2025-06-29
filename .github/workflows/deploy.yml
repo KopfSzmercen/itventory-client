@@ -61,6 +61,7 @@ jobs:
           containerAppName: ${{ secrets.AZURE_CONTAINER_APP_NAME }}
           resourceGroup: ${{ secrets.AZURE_RESOURCE_GROUP }}
           imageToDeploy: ghcr.io/${{ steps.string.outputs.lowercase }}/it-ventory-client:${{ github.sha }}
+          targetPort: 3000
           environmentVariables: "NEXT_PUBLIC_BACKEND_ROOT_URL=${{ secrets.NEXT_PUBLIC_BACKEND_ROOT_URL }} NEXT_PUBLIC_AI_ROOT_URL=${{ secrets.NEXT_PUBLIC_AI_ROOT_URL }} AUTH_TRUST_HOST=${{ secrets.AUTH_TRUST_HOST }} NEXTAUTH_URL=${{ secrets.NEXTAUTH_URL }} BACKEND_ROOT_URL=${{ secrets.BACKEND_ROOT_URL }}"
           registryUrl: ghcr.io
           registryUsername: ${{ steps.string.outputs.lowercase }}
