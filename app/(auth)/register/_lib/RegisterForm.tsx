@@ -30,7 +30,7 @@ type RegisterFormData = z.infer<typeof registerSchema>;
 
 const registerApiRequest = async (data: RegisterFormData) => {
   try {
-    await api.post("/itventory/Identity", {
+    await api.post("/Identity", {
       email: data.email,
       password: data.password,
       username: data.email
