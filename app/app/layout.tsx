@@ -1,4 +1,5 @@
 import { AppSidebar } from "@/app/app/_lib/AppSidebar";
+import { auth } from "@/auth";
 import {
   SidebarInset,
   SidebarProvider,
@@ -11,6 +12,8 @@ export default async function Layout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  await auth();
+
   return (
     <SidebarProvider>
       <AppSidebar />
