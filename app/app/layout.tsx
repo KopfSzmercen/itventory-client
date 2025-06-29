@@ -12,7 +12,10 @@ export default async function Layout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  await auth();
+  const user = await auth();
+  if (!user) {
+    return null;
+  }
 
   return (
     <SidebarProvider>

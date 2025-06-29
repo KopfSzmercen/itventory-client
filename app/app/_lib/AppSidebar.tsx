@@ -69,7 +69,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar collapsible="icon" {...props}>
       <NavUser
-        user={{ ...(session.data?.user as { name: string; email: string }) }}
+        user={{ ...(session?.data?.user as { name: string; email: string }) }}
       />
       <SidebarContent>
         <NavMain items={navItems} />
