@@ -25,13 +25,17 @@ RUN npm install -g pnpm
 # Uncomment the following line in case you want to disable telemetry during the build.
 # ENV NEXT_TELEMETRY_DISABLED 1
 
+# Ensure Tailwind CSS can process all files by setting NODE_ENV to production
+ENV NODE_ENV=production
+
+# Build the application - this will process Tailwind CSS 4
 RUN pnpm build
 
 # 3. Production image, copy all the files and run next
 FROM node:22-alpine AS runner
 WORKDIR /app
 
-ENV NODE_ENV production
+ENV NODE_ENV=production
 # Uncomment the following line in case you want to disable telemetry during runtime.
 # ENV NEXT_TELEMETRY_DISABLED 1
 
@@ -49,9 +53,9 @@ USER nextjs
 
 EXPOSE 3000
 
-ENV PORT 3000
+ENV PORT=3000
 
 # We need to tell Next.js to use the correct hostname
-ENV HOSTNAME "0.0.0.0"
+ENV HOSTNAME="0.0.0.0"
 
 CMD ["node", "server.js"]

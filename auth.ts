@@ -74,10 +74,6 @@ export const { auth, signIn, signOut, handlers } = NextAuth({
     })
   ],
   callbacks: {
-    authorized: async ({ auth }) => {
-      // Logged in users are authenticated, otherwise redirect to login page
-      return !!auth;
-    },
     session: async ({ session, token }) => {
       // Add property to session, so it's available in the client
       session.user.username = token.username as string;
@@ -95,5 +91,6 @@ export const { auth, signIn, signOut, handlers } = NextAuth({
       return token;
     }
   },
-  trustHost: true
+  trustHost: true,
+  secret: process.env.AUTH_SECRET
 });
