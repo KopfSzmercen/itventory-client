@@ -27,6 +27,7 @@ export const getThreadMessages = async (
       role: "user" | "assistant";
       text: string;
       createdAt: string;
+      abc?: string;
     }>;
   }>(`/thread/${threadId}/messages`, {
     params: { userId }
