@@ -11,7 +11,7 @@ export default auth((req) => {
   const isOnHome = nextUrl.pathname === "/";
 
   // Redirect authenticated users away from login/register pages
-  if (isAuthenticated && (isOnLogin || isOnRegister)) {
+  if (isAuthenticated && (isOnLogin || isOnRegister || isOnHome)) {
     return NextResponse.redirect(new URL("/app", nextUrl));
   }
 
